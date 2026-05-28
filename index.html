@@ -4,28 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Devotion Education | 留學顧問與海外教育專家</title>
+    
+    <!-- 引入 Google Fonts 高質感字型：思源宋體 (Noto Serif TC) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700&display=swap" rel="stylesheet">
+
     <style>
-        /* 基礎全域設定 */
+        /* 🎨 奶油色系核心色調定義
+           主要背景：#fdfbf7 (燕麥奶白)
+           次要背景/卡片：#f4eee1 (濃郁奶油)
+           主色調/文字：#4a3f35 (深焙摩卡棕)
+           點綴色/按鈕：#bd9a7a (泰式奶茶金)
+        */
+
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Helvetica Neue', Arial, 'Noto Sans TC', sans-serif;
+            /* 💡 在這裡更改字型！目前優先使用優雅的思源宋體 */
+            font-family: 'Noto Serif TC', "Segoe UI", serif;
         }
 
         body {
-            color: #333;
-            line-height: 1.6;
-            background-color: #f9f9f9;
+            color: #4a3f35; /* 深棕色文字，比純黑更溫柔 */
+            line-height: 1.8;
+            background-color: #fdfbf7; /* 燕麥奶白背景 */
         }
 
         /* 導覽列 */
         header {
-            background-color: #0d2c54; /* 沉穩深藍色，展現專業感 */
+            background-color: rgba(253, 251, 247, 0.95); /* 半透明燕麥白 */
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(74, 63, 53, 0.05);
+            border-bottom: 1px solid #ede4d3;
         }
 
         .nav-container {
@@ -34,15 +48,16 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px;
+            padding: 18px 20px;
         }
 
         .logo {
-            color: #fff;
+            color: #4a3f35;
             font-size: 24px;
             font-weight: bold;
             text-decoration: none;
             letter-spacing: 1px;
+            cursor: pointer;
         }
 
         .nav-menu {
@@ -51,97 +66,107 @@
         }
 
         .nav-item {
-            margin-left: 20px;
+            margin-left: 15px;
         }
 
         .nav-link {
-            color: #e0e0e0;
+            color: #706253;
             text-decoration: none;
             font-size: 16px;
             padding: 8px 16px;
-            border-radius: 4px;
+            border-radius: 20px; /* 圓角感顯得更柔和 */
             transition: all 0.3s ease;
             cursor: pointer;
         }
 
         .nav-link:hover, .nav-link.active {
-            color: #fff;
-            background-color: #c97a3e; /* 溫暖的金色/橘色調 */
+            color: #4a3f35;
+            background-color: #f4eee1; /* 奶油色底框 */
+            font-weight: bold;
         }
 
-        /* 頁面區塊控制（預設隱藏，啟用時顯示） */
+        /* 頁面區塊控制 */
         .page-section {
             display: none;
-            padding: 60px 20px;
+            padding: 80px 20px;
             max-width: 1200px;
             margin: 0 auto;
-            min-height: 70vh;
+            min-height: 75vh;
         }
 
         .page-section.active {
             display: block;
-            animation: fadeIn 0.5s ease;
+            animation: fadeIn 0.6s ease-out;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         /* 首頁 Hero 區域 */
         .hero {
-            background: linear-gradient(rgba(13, 44, 84, 0.85), rgba(13, 44, 84, 0.85)), url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
+            /* 使用帶有溫暖色調的背景遮罩 */
+            background: linear-gradient(rgba(244, 238, 225, 0.4), rgba(74, 63, 53, 0.6)), url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
             color: white;
             text-align: center;
-            padding: 100px 20px;
-            border-radius: 8px;
-            margin-bottom: 40px;
+            padding: 120px 20px;
+            border-radius: 16px;
+            margin-bottom: 60px;
+            box-shadow: 0 10px 20px rgba(74, 63, 53, 0.05);
         }
 
         .hero h1 {
-            font-size: 42px;
+            font-size: 40px;
             margin-bottom: 20px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            font-weight: 700;
         }
 
         .hero p {
-            font-size: 20px;
-            margin-bottom: 30px;
-            color: #d1d5db;
+            font-size: 18px;
+            margin-bottom: 35px;
+            color: #fdfbf7;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.2);
         }
 
         .btn {
             display: inline-block;
-            background-color: #c97a3e;
+            background-color: #bd9a7a; /* 奶茶金 */
             color: white;
-            padding: 12px 30px;
+            padding: 12px 35px;
             text-decoration: none;
-            font-size: 18px;
-            border-radius: 5px;
+            font-size: 16px;
+            border-radius: 30px; /* 膠囊狀圓角 */
             font-weight: bold;
-            transition: background 0.3s;
+            transition: all 0.3s;
             cursor: pointer;
             border: none;
+            box-shadow: 0 4px 10px rgba(189, 154, 122, 0.3);
         }
 
         .btn:hover {
-            background-color: #b0652f;
+            background-color: #a68363;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(189, 154, 122, 0.4);
         }
 
         /* 內容排版 */
         h2 {
-            font-size: 32px;
-            color: #0d2c54;
+            font-size: 30px;
+            color: #4a3f35;
             margin-bottom: 20px;
             text-align: center;
             position: relative;
-            padding-bottom: 10px;
+            padding-bottom: 15px;
+            font-weight: 700;
         }
 
         h2::after {
             content: '';
-            width: 60px;
-            height: 3px;
-            background-color: #c97a3e;
+            width: 40px;
+            height: 2px;
+            background-color: #bd9a7a;
             position: absolute;
             bottom: 0;
             left: 50%;
@@ -150,12 +175,12 @@
 
         .section-desc {
             text-align: center;
-            color: #666;
-            margin-bottom: 40px;
-            font-size: 18px;
+            color: #8c7e70;
+            margin-bottom: 50px;
+            font-size: 16px;
         }
 
-        /* 服務項目卡片（自動適應排版） */
+        /* 服務項目卡片 */
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -164,31 +189,39 @@
         }
 
         .service-card {
-            background: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            border-top: 4px solid #0d2c54;
-            transition: transform 0.3s;
+            background: #f4eee1; /* 濃郁奶油色卡片 */
+            padding: 35px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            border: 1px solid #ede4d3;
         }
 
         .service-card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(74, 63, 53, 0.05);
+            background: #ffffff; /* 懸浮時變白色，增加互動感 */
         }
 
         .service-card h3 {
-            color: #0d2c54;
+            color: #4a3f35;
             margin-bottom: 15px;
-            font-size: 22px;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .service-card p {
+            color: #706253;
+            font-size: 15px;
         }
 
         /* 關於我們 */
         .about-content {
-            background: white;
+            background: #f4eee1;
             padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            font-size: 18px;
+            border-radius: 12px;
+            border: 1px solid #ede4d3;
+            font-size: 16px;
+            color: #5c4f43;
         }
 
         .about-content p {
@@ -203,26 +236,29 @@
         }
 
         .contact-info {
-            background: #0d2c54;
-            color: white;
+            background: #4a3f35; /* 沉穩深摩卡色作對比 */
+            color: #fdfbf7;
             padding: 40px;
-            border-radius: 8px;
+            border-radius: 12px;
         }
 
         .contact-info h3 {
             margin-bottom: 20px;
-            color: #c97a3e;
+            color: #bd9a7a;
+            font-size: 22px;
         }
 
         .contact-info p {
             margin-bottom: 15px;
+            color: #e3dec3;
+            font-size: 15px;
         }
 
         .contact-form {
-            background: white;
+            background: #f4eee1;
             padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-radius: 12px;
+            border: 1px solid #ede4d3;
         }
 
         .form-group {
@@ -231,26 +267,37 @@
 
         .form-group label {
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
             font-weight: bold;
+            font-size: 15px;
+            color: #4a3f35;
         }
 
         .form-group input, .form-group textarea {
             width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 16px;
+            padding: 12px;
+            border: 1px solid #ede4d3;
+            background-color: #fdfbf7;
+            border-radius: 8px;
+            font-size: 15px;
+            color: #4a3f35;
+            outline: none;
+            transition: border 0.3s;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            border: 1px solid #bd9a7a;
         }
 
         /* 頁尾 */
         footer {
-            background-color: #111;
-            color: #888;
+            background-color: #383028;
+            color: #a6988b;
             text-align: center;
-            padding: 20px;
-            font-size: 14px;
-            margin-top: 40px;
+            padding: 25px;
+            font-size: 13px;
+            margin-top: 60px;
+            letter-spacing: 0.5px;
         }
 
         /* 📱 手機板自動適應優化 (RWD) */
@@ -268,30 +315,31 @@
             }
 
             .nav-item {
-                margin: 5px 10px;
+                margin: 5px;
             }
 
             .nav-link {
-                font-size: 15px;
+                font-size: 14px;
                 padding: 6px 12px;
             }
 
             .hero h1 {
-                font-size: 28px;
+                font-size: 26px;
             }
 
             .hero p {
-                font-size: 16px;
+                font-size: 15px;
             }
 
             .page-section {
-                padding: 40px 15px;
+                padding: 50px 15px;
             }
         }
     </style>
 </head>
 <body>
 
+    <!-- 導覽列 -->
     <header>
         <nav class="nav-container">
             <a class="logo" onclick="switchPage('home')">Devotion Education</a>
@@ -304,8 +352,10 @@
         </nav>
     </header>
 
+    <!-- 主內容區 -->
     <main>
         
+        <!-- 首頁 -->
         <section id="home" class="page-section active">
             <div class="hero">
                 <h1>啟航海外學術之旅，成就未來無限可能</h1>
@@ -332,6 +382,7 @@
             </div>
         </section>
 
+        <!-- 關於我們 -->
         <section id="about" class="page-section">
             <h2>關於我們</h2>
             <p class="section-desc">關於 Devotion Education 的理念與核心價值</p>
@@ -343,6 +394,7 @@
             </div>
         </section>
 
+        <!-- 服務項目 -->
         <section id="services" class="page-section">
             <h2>服務項目</h2>
             <p class="section-desc">全方位的海外升學與教育規劃服務</p>
@@ -367,6 +419,7 @@
             </div>
         </section>
 
+        <!-- 聯絡我們 -->
         <section id="contact" class="page-section">
             <h2>聯絡我們</h2>
             <p class="section-desc">預約首次免費諮詢，開啟您的海外留學第一步</p>
@@ -400,37 +453,34 @@
 
     </main>
 
+    <!-- 頁尾 -->
     <footer>
         <p>&copy; 2026 Devotion Education. All Rights Reserved. | Overseas Education Advisor & Study Abroad Consultant</p>
     </footer>
 
+    <!-- 網頁分頁切換控制 JavaScript -->
     <script>
         function switchPage(pageId) {
-            // 1. 隱藏所有頁面區塊
             const sections = document.querySelectorAll('.page-section');
             sections.forEach(section => {
                 section.classList.remove('active');
             });
             
-            // 2. 移除所有導覽列按鈕的 active 狀態
             const links = document.querySelectorAll('.nav-link');
             links.forEach(link => {
                 link.classList.remove('active');
             });
             
-            // 3. 顯示被點擊的頁面
             const targetSection = document.getElementById(pageId);
             if(targetSection) {
                 targetSection.classList.add('active');
             }
             
-            // 4. 將對應的導覽按鈕變色
             const targetLink = document.getElementById('nav-' + pageId);
             if(targetLink) {
                 targetLink.classList.add('active');
             }
 
-            // 5. 自動滾動回網頁最上方
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     </script>
