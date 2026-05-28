@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Devotion Education | 留學顧問與海外教育專家</title>
+    <style>
+        /* 基礎全域設定 */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Helvetica Neue', Arial, 'Noto Sans TC', sans-serif;
+        }
+
+        body {
+            color: #333;
+            line-height: 1.6;
+            background-color: #f9f9f9;
+        }
+
+        /* 導覽列 */
+        header {
+            background-color: #0d2c54; /* 沉穩深藍色，展現專業感 */
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .logo {
+            color: #fff;
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-item {
+            margin-left: 20px;
+        }
+
+        .nav-link {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 8px 16px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: #fff;
+            background-color: #c97a3e; /* 溫暖的金色/橘色調 */
+        }
+
+        /* 頁面區塊控制（預設隱藏，啟用時顯示） */
+        .page-section {
+            display: none;
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            min-height: 70vh;
+        }
+
+        .page-section.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 首頁 Hero 區域 */
+        .hero {
+            background: linear-gradient(rgba(13, 44, 84, 0.85), rgba(13, 44, 84, 0.85)), url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
+            color: white;
+            text-align: center;
+            padding: 100px 20px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            color: #d1d5db;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #c97a3e;
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            font-size: 18px;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn:hover {
+            background-color: #b0652f;
+        }
+
+        /* 內容排版 */
+        h2 {
+            font-size: 32px;
+            color: #0d2c54;
+            margin-bottom: 20px;
+            text-align: center;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        h2::after {
+            content: '';
+            width: 60px;
+            height: 3px;
+            background-color: #c97a3e;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-desc {
+            text-align: center;
+            color: #666;
+            margin-bottom: 40px;
+            font-size: 18px;
+        }
+
+        /* 服務項目卡片（自動適應排版） */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .service-card {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-top: 4px solid #0d2c54;
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-card h3 {
+            color: #0d2c54;
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+
+        /* 關於我們 */
+        .about-content {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            font-size: 18px;
+        }
+
+        .about-content p {
+            margin-bottom: 20px;
+        }
+
+        /* 聯絡我們 */
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .contact-info {
+            background: #0d2c54;
+            color: white;
+            padding: 40px;
+            border-radius: 8px;
+        }
+
+        .contact-info h3 {
+            margin-bottom: 20px;
+            color: #c97a3e;
+        }
+
+        .contact-info p {
+            margin-bottom: 15px;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        /* 頁尾 */
+        footer {
+            background-color: #111;
+            color: #888;
+            text-align: center;
+            padding: 20px;
+            font-size: 14px;
+            margin-top: 40px;
+        }
+
+        /* 📱 手機板自動適應優化 (RWD) */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                padding: 15px;
+            }
+
+            .nav-menu {
+                margin-top: 15px;
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .nav-item {
+                margin: 5px 10px;
+            }
+
+            .nav-link {
+                font-size: 15px;
+                padding: 6px 12px;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .page-section {
+                padding: 40px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav class="nav-container">
+            <a class="logo" onclick="switchPage('home')">Devotion Education</a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a class="nav-link active" id="nav-home" onclick="switchPage('home')">首頁</a></li>
+                <li class="nav-item"><a class="nav-link" id="nav-about" onclick="switchPage('about')">關於我們</a></li>
+                <li class="nav-item"><a class="nav-link" id="nav-services" onclick="switchPage('services')">服務項目</a></li>
+                <li class="nav-item"><a class="nav-link" id="nav-contact" onclick="switchPage('contact')">聯絡我們</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        
+        <section id="home" class="page-section active">
+            <div class="hero">
+                <h1>啟航海外學術之旅，成就未來無限可能</h1>
+                <p>Devotion Education — 您最值得信賴的專業留學顧問與海外教育專家</p>
+                <button class="btn" onclick="switchPage('services')">探索我們的服務</button>
+            </div>
+            
+            <h2>為什麼選擇 Devotion Education？</h2>
+            <p class="section-desc">我們擁有豐富的諮詢經驗，陪伴無數學子成功申請全球頂尖名校。</p>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>專業精準落點</h3>
+                    <p>根據學生的學術背景、興趣與職涯規劃，量身打造最合適的校系申請清單。</p>
+                </div>
+                <div class="service-card">
+                    <h3>精緻文件指導</h3>
+                    <p>外籍顧問團隊親自指導個人陳述 (PS)、讀書計畫 (SOP) 與推薦信，突顯個人亮點。</p>
+                </div>
+                <div class="service-card">
+                    <h3>一站式貼心服務</h3>
+                    <p>從落點分析、面試培訓到簽證辦理、行前說明，全程細心陪伴，讓您安心出國。</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="page-section">
+            <h2>關於我們</h2>
+            <p class="section-desc">關於 Devotion Education 的理念與核心價值</p>
+            
+            <div class="about-content">
+                <p><strong>Devotion Education (海外教育顧問)</strong> 成立的初衷，是為了打破資訊不對稱，為渴望開拓國際視野的學子提供最客觀、最專業的諮詢服務。</p>
+                <p>我們的核心業務涵蓋 <strong>Study Abroad Consultant (留學顧問)</strong> 與 <strong>Overseas Education Advisor (海外教育諮詢)</strong>。團隊成員皆擁有海外留學背景與多年的教育產業經驗，深知國際學生在面對申請時的焦慮與挑戰。</p>
+                <p>「Devotion」代表我們的專注與奉獻。我們不只是代辦，更是您人生轉折點上的引路人與合作夥伴。不論您的目標是美國常春藤、英國羅素集團，還是歐美各國的頂尖技職與藝術學院，我們都將竭盡所能，助您圓夢。</p>
+            </div>
+        </section>
+
+        <section id="services" class="page-section">
+            <h2>服務項目</h2>
+            <p class="section-desc">全方位的海外升學與教育規劃服務</p>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>海外大學 / 碩博士申請諮詢</h3>
+                    <p>提供美、英、加、澳、歐陸等國家的全方位學位申請規劃，掌握最新入學趨勢。</p>
+                </div>
+                <div class="service-card">
+                    <h3>一對一模擬面試培訓</h3>
+                    <p>針對特定校系進行全英文模擬面試，訓練答題邏輯、儀態與自信心，提高錄取率。</p>
+                </div>
+                <div class="service-card">
+                    <h3>語言檢定與學術課業規劃</h3>
+                    <p>協助規劃 TOEFL, IELTS, GRE, GMAT 等重要考試的準備時程，維持在校 GPA。</p>
+                </div>
+                <div class="service-card">
+                    <h3>職涯發展與實習諮詢</h3>
+                    <p>結合海外就業市場趨勢，引導學生在學期間累積實習經驗，為畢業後的職涯提早佈局。</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="page-section">
+            <h2>聯絡我們</h2>
+            <p class="section-desc">預約首次免費諮詢，開啟您的海外留學第一步</p>
+            
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>聯絡資訊</h3>
+                    <p><strong>地址：</strong> 台北市大安區忠孝東路（範例地址）</p>
+                    <p><strong>電話：</strong> +886-2-1234-5678</p>
+                    <p><strong>Email：</strong> info@devotionedu.example.com</p>
+                    <p><strong>營業時間：</strong> 週一至週五 10:00 - 19:00 (週末採預約制)</p>
+                </div>
+                
+                <div class="contact-form">
+                    <div class="form-group">
+                        <label for="name">姓名</label>
+                        <input type="text" id="name" placeholder="請輸入您的姓名">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">電子信箱</label>
+                        <input type="email" id="email" placeholder="請輸入您的 Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="msg">諮詢意向（想去的國家/預計出國時間）</label>
+                        <textarea id="msg" rows="4" placeholder="請簡單描述您的需求..."></textarea>
+                    </div>
+                    <button class="btn" style="width:100%;" onclick="alert('謝謝您的訊息！這只是靜態範例，後續若需連動後台收信功能可再擴充。')">送出預約</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Devotion Education. All Rights Reserved. | Overseas Education Advisor & Study Abroad Consultant</p>
+    </footer>
+
+    <script>
+        function switchPage(pageId) {
+            // 1. 隱藏所有頁面區塊
+            const sections = document.querySelectorAll('.page-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // 2. 移除所有導覽列按鈕的 active 狀態
+            const links = document.querySelectorAll('.nav-link');
+            links.forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // 3. 顯示被點擊的頁面
+            const targetSection = document.getElementById(pageId);
+            if(targetSection) {
+                targetSection.classList.add('active');
+            }
+            
+            // 4. 將對應的導覽按鈕變色
+            const targetLink = document.getElementById('nav-' + pageId);
+            if(targetLink) {
+                targetLink.classList.add('active');
+            }
+
+            // 5. 自動滾動回網頁最上方
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
