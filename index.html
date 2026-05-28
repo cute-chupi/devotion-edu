@@ -3,43 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Devotion Education | 留學顧問與海外教育專家</title>
+    <title>Devotion Education | Premium Overseas Education Advisor</title>
     
-    <!-- 引入 Google Fonts 高質感字型：思源宋體 (Noto Serif TC) -->
+    <!-- 引入頂級學院感字型：思源宋體 (Noto Serif TC) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;700&display=swap" rel="stylesheet">
 
     <style>
-        /* 🎨 奶油色系核心色調定義
-           主要背景：#fdfbf7 (燕麥奶白)
-           次要背景/卡片：#f4eee1 (濃郁奶油)
-           主色調/文字：#4a3f35 (深焙摩卡棕)
-           點綴色/按鈕：#bd9a7a (泰式奶茶金)
-        */
+        /* 🎨 莫蘭迪高端奶油學院色調定義 */
+        :root {
+            --bg-cream: #fdfbf7;       /* 燕麥奶白 */
+            --bg-card: #f5efe4;        /* 濃郁奶油色 */
+            --text-dark: #3a322a;      /* 深焙摩卡棕 */
+            --text-muted: #6e6153;     /* 燕麥灰棕 */
+            --primary-gold: #b38f61;   /* 頂級留學代辦金 */
+            --navy-accent: #1d2d44;    /* 經典常春藤深藍 */
+        }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            /* 💡 在這裡更改字型！目前優先使用優雅的思源宋體 */
-            font-family: 'Noto Serif TC', "Segoe UI", serif;
+            font-family: 'Noto Serif TC', "Times New Roman", serif;
         }
 
         body {
-            color: #4a3f35; /* 深棕色文字，比純黑更溫柔 */
+            color: var(--text-dark);
             line-height: 1.8;
-            background-color: #fdfbf7; /* 燕麥奶白背景 */
+            background-color: var(--bg-cream);
+            background-image: radial-gradient(rgba(179, 143, 97, 0.03) 1px, transparent 0);
+            background-size: 24px 24px;
         }
 
-        /* 導覽列 */
+        /* 導覽列：簡約優雅低調設計 */
         header {
-            background-color: rgba(253, 251, 247, 0.95); /* 半透明燕麥白 */
+            background-color: rgba(253, 251, 247, 0.96);
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(74, 63, 53, 0.05);
-            border-bottom: 1px solid #ede4d3;
+            border-bottom: 1px solid #ebdcb9;
+            backdrop-filter: blur(10px);
         }
 
         .nav-container {
@@ -48,405 +52,526 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 18px 20px;
+            padding: 22px 30px;
         }
 
-        .logo {
-            color: #4a3f35;
-            font-size: 24px;
-            font-weight: bold;
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
             text-decoration: none;
-            letter-spacing: 1px;
             cursor: pointer;
+        }
+
+        .logo-text {
+            color: var(--text-dark);
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        /* 象樹葉高質感標誌圖騰 */
+        .logo-icon {
+            color: var(--primary-gold);
+            font-size: 20px;
         }
 
         .nav-menu {
             display: flex;
             list-style: none;
-        }
-
-        .nav-item {
-            margin-left: 15px;
+            gap: 10px;
         }
 
         .nav-link {
-            color: #706253;
+            color: var(--text-muted);
             text-decoration: none;
-            font-size: 16px;
-            padding: 8px 16px;
-            border-radius: 20px; /* 圓角感顯得更柔和 */
+            font-size: 15px;
+            font-weight: 500;
+            padding: 8px 18px;
+            border-radius: 0;
             transition: all 0.3s ease;
             cursor: pointer;
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: 4px;
+            left: 18px;
+            background-color: var(--primary-gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after, .nav-link.active::after {
+            width: calc(100% - 36px);
         }
 
         .nav-link:hover, .nav-link.active {
-            color: #4a3f35;
-            background-color: #f4eee1; /* 奶油色底框 */
-            font-weight: bold;
+            color: var(--text-dark);
         }
 
-        /* 頁面區塊控制 */
+        /* 頁面區塊基礎設定 */
         .page-section {
             display: none;
-            padding: 80px 20px;
-            max-width: 1200px;
+            max-width: 1250px;
             margin: 0 auto;
-            min-height: 75vh;
+            padding: 60px 30px;
+            min-height: 80vh;
         }
 
         .page-section.active {
             display: block;
-            animation: fadeIn 0.6s ease-out;
+            animation: fadeInPage 0.8s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
+        @keyframes fadeInPage {
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* 首頁 Hero 區域 */
-        .hero {
-            /* 使用帶有溫暖色調的背景遮罩 */
-            background: linear-gradient(rgba(244, 238, 225, 0.4), rgba(74, 63, 53, 0.6)), url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
-            color: white;
-            text-align: center;
-            padding: 120px 20px;
-            border-radius: 16px;
-            margin-bottom: 60px;
-            box-shadow: 0 10px 20px rgba(74, 63, 53, 0.05);
+        /* 🏰 首頁：全螢幕高質感史丹佛校園主視覺 */
+        .hero-fullscreen {
+            position: relative;
+            /* 直接調用您的 STANFORD.jpg 檔案 */
+            background: url('STANFORD.jpg') no-repeat center center/cover;
+            min-height: 82vh;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            padding: 60px;
+            box-shadow: inset 0 0 100px rgba(0,0,0,0.2);
+            margin-bottom: 40px;
         }
 
-        .hero h1 {
-            font-size: 40px;
-            margin-bottom: 20px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        /* 高級半透明奶油玻璃字卡 */
+        .hero-glass-card {
+            background-color: rgba(253, 251, 247, 0.93);
+            border: 1px solid rgba(224, 210, 181, 0.6);
+            padding: 50px 45px;
+            max-width: 580px;
+            box-shadow: 0 15px 35px rgba(58, 50, 42, 0.15);
+            position: relative;
+        }
+
+        /* 精緻雙線古雅框線 */
+        .hero-glass-card::before {
+            content: '';
+            position: absolute;
+            top: 10px; left: 10px; right: 10px; bottom: 10px;
+            border: 1px solid rgba(179, 143, 97, 0.4);
+            pointer-events: none;
+        }
+
+        .hero-glass-card h1 {
+            font-size: 34px;
+            color: var(--text-dark);
+            line-height: 1.4;
+            margin-bottom: 18px;
             font-weight: 700;
         }
 
-        .hero p {
-            font-size: 18px;
-            margin-bottom: 35px;
-            color: #fdfbf7;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        .hero-glass-card p {
+            font-size: 16px;
+            color: var(--text-muted);
+            margin-bottom: 30px;
         }
 
-        .btn {
+        /* 經典復古學院按鈕 */
+        .btn-classic {
             display: inline-block;
-            background-color: #bd9a7a; /* 奶茶金 */
-            color: white;
+            background-color: var(--text-dark);
+            color: var(--bg-cream);
             padding: 12px 35px;
             text-decoration: none;
-            font-size: 16px;
-            border-radius: 30px; /* 膠囊狀圓角 */
-            font-weight: bold;
+            font-size: 15px;
+            letter-spacing: 1px;
             transition: all 0.3s;
             cursor: pointer;
-            border: none;
-            box-shadow: 0 4px 10px rgba(189, 154, 122, 0.3);
+            border: 1px solid var(--text-dark);
         }
 
-        .btn:hover {
-            background-color: #a68363;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(189, 154, 122, 0.4);
+        .btn-classic:hover {
+            background-color: transparent;
+            color: var(--text-dark);
         }
 
-        /* 內容排版 */
-        h2 {
-            font-size: 30px;
-            color: #4a3f35;
-            margin-bottom: 20px;
+        /* 網頁大標題設計 */
+        .editorial-title {
             text-align: center;
-            position: relative;
-            padding-bottom: 15px;
+            margin: 60px 0 40px 0;
+        }
+
+        .editorial-title h2 {
+            font-size: 28px;
             font-weight: 700;
+            color: var(--text-dark);
+            letter-spacing: 1px;
         }
 
-        h2::after {
-            content: '';
-            width: 40px;
-            height: 2px;
-            background-color: #bd9a7a;
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
+        .editorial-title .subtitle {
+            font-size: 14px;
+            color: var(--primary-gold);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-top: 5px;
         }
 
-        .section-desc {
-            text-align: center;
-            color: #8c7e70;
-            margin-bottom: 50px;
-            font-size: 16px;
+        /* 🌟 雜誌風格交錯排版（絕非平庸AI套版） */
+        .split-row {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            margin-bottom: 80px;
         }
 
-        /* 服務項目卡片 */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 20px;
+        .split-row.reverse {
+            flex-direction: row-reverse;
         }
 
-        .service-card {
-            background: #f4eee1; /* 濃郁奶油色卡片 */
-            padding: 35px;
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            border: 1px solid #ede4d3;
+        .split-text {
+            flex: 1;
+            padding: 20px;
         }
 
-        .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(74, 63, 53, 0.05);
-            background: #ffffff; /* 懸浮時變白色，增加互動感 */
+        .split-text .number {
+            font-size: 36px;
+            font-family: "Times New Roman", serif;
+            color: rgba(179, 143, 97, 0.3);
+            font-style: italic;
+            margin-bottom: -10px;
         }
 
-        .service-card h3 {
-            color: #4a3f35;
-            margin-bottom: 15px;
-            font-size: 20px;
-            font-weight: 700;
-        }
-
-        .service-card p {
-            color: #706253;
-            font-size: 15px;
-        }
-
-        /* 關於我們 */
-        .about-content {
-            background: #f4eee1;
-            padding: 40px;
-            border-radius: 12px;
-            border: 1px solid #ede4d3;
-            font-size: 16px;
-            color: #5c4f43;
-        }
-
-        .about-content p {
-            margin-bottom: 20px;
-        }
-
-        /* 聯絡我們 */
-        .contact-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .contact-info {
-            background: #4a3f35; /* 沉穩深摩卡色作對比 */
-            color: #fdfbf7;
-            padding: 40px;
-            border-radius: 12px;
-        }
-
-        .contact-info h3 {
-            margin-bottom: 20px;
-            color: #bd9a7a;
+        .split-text h3 {
             font-size: 22px;
-        }
-
-        .contact-info p {
+            color: var(--text-dark);
             margin-bottom: 15px;
-            color: #e3dec3;
-            font-size: 15px;
+            border-bottom: 1px solid #ebdcb9;
+            padding-bottom: 8px;
         }
 
-        .contact-form {
-            background: #f4eee1;
+        .split-text p {
+            color: var(--text-muted);
+            font-size: 16px;
+            text-align: justify;
+        }
+
+        .split-visual {
+            flex: 1;
+            background-color: var(--bg-card);
+            border: 1px solid #ebdcb9;
             padding: 40px;
-            border-radius: 12px;
-            border: 1px solid #ede4d3;
+            position: relative;
         }
 
-        .form-group {
+        /* 古典邊角裝飾 */
+        .split-visual::before {
+            content: '❧';
+            position: absolute;
+            top: 15px; left: 15px;
+            color: var(--primary-gold);
+            font-size: 18px;
+        }
+
+        .quote-box {
+            font-size: 18px;
+            font-style: italic;
+            color: var(--text-dark);
+            line-height: 1.8;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        /* 關於我們區塊 */
+        .editorial-about-box {
+            background-color: var(--bg-card);
+            border: 1px solid #ebdcb9;
+            padding: 60px;
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .editorial-about-box p {
+            font-size: 17px;
+            color: var(--text-dark);
+            margin-bottom: 25px;
+            text-align: justify;
+        }
+
+        /* 聯絡我們：雙欄精緻切分 */
+        .contact-flex {
+            display: flex;
+            gap: 50px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .contact-meta {
+            flex: 1;
+            background-color: var(--navy-accent);
+            color: #fdfbf7;
+            padding: 50px;
+            border-top: 3px solid var(--primary-gold);
+        }
+
+        .contact-meta h3 {
+            font-size: 22px;
+            color: var(--primary-gold);
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+        }
+
+        .contact-meta p {
             margin-bottom: 20px;
+            font-size: 15px;
+            color: #d1c7bd;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 12px;
         }
 
-        .form-group label {
+        .contact-webform {
+            flex: 1.2;
+            background-color: var(--bg-card);
+            border: 1px solid #ebdcb9;
+            padding: 50px;
+        }
+
+        .form-field {
+            margin-bottom: 22px;
+        }
+
+        .form-field label {
             display: block;
             margin-bottom: 8px;
-            font-weight: bold;
+            font-weight: 500;
             font-size: 15px;
-            color: #4a3f35;
         }
 
-        .form-group input, .form-group textarea {
+        .form-field input, .form-field textarea {
             width: 100%;
             padding: 12px;
-            border: 1px solid #ede4d3;
-            background-color: #fdfbf7;
-            border-radius: 8px;
+            border: 1px solid #ebdcb9;
+            background-color: var(--bg-cream);
+            color: var(--text-dark);
             font-size: 15px;
-            color: #4a3f35;
             outline: none;
-            transition: border 0.3s;
+            transition: all 0.3s;
         }
 
-        .form-group input:focus, .form-group textarea:focus {
-            border: 1px solid #bd9a7a;
+        .form-field input:focus, .form-field textarea:focus {
+            border: 1px solid var(--text-dark);
+            background-color: #ffffff;
         }
 
         /* 頁尾 */
         footer {
-            background-color: #383028;
-            color: #a6988b;
+            background-color: #211c18;
+            color: #94877a;
             text-align: center;
-            padding: 25px;
+            padding: 35px 20px;
             font-size: 13px;
-            margin-top: 60px;
-            letter-spacing: 0.5px;
+            margin-top: 80px;
+            border-top: 1px solid var(--primary-gold);
+            letter-spacing: 1px;
         }
 
-        /* 📱 手機板自動適應優化 (RWD) */
+        /* 📱 完美適應所有行動裝置與平板 */
+        @media (max-width: 992px) {
+            .split-row, .split-row.reverse {
+                flex-direction: column;
+                gap: 30px;
+                margin-bottom: 50px;
+            }
+            .contact-flex {
+                flex-direction: column;
+                gap: 30px;
+            }
+        }
+
         @media (max-width: 768px) {
             .nav-container {
                 flex-direction: column;
                 padding: 15px;
+                gap: 15px;
             }
-
             .nav-menu {
-                margin-top: 15px;
-                width: 100%;
-                justify-content: center;
                 flex-wrap: wrap;
+                justify-content: center;
+                gap: 5px;
             }
-
-            .nav-item {
-                margin: 5px;
-            }
-
             .nav-link {
                 font-size: 14px;
                 padding: 6px 12px;
             }
-
-            .hero h1 {
-                font-size: 26px;
+            .hero-fullscreen {
+                min-height: auto;
+                padding: 20px;
+                background-position: 65% center; /* 行動版自動聚焦史丹佛高塔剪影 */
             }
-
-            .hero p {
-                font-size: 15px;
+            .hero-glass-card {
+                padding: 30px 20px;
             }
-
+            .hero-glass-card h1 {
+                font-size: 24px;
+            }
+            .editorial-about-box {
+                padding: 30px 20px;
+            }
             .page-section {
-                padding: 50px 15px;
+                padding: 40px 15px;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- 導覽列 -->
+    <!-- 高級感導覽列 -->
     <header>
         <nav class="nav-container">
-            <a class="logo" onclick="switchPage('home')">Devotion Education</a>
+            <a class="logo-area" onclick="switchPage('home')">
+                <span class="logo-icon">🍂</span>
+                <span class="logo-text">DEVOTION EDUCATION</span>
+            </a>
             <ul class="nav-menu">
-                <li class="nav-item"><a class="nav-link active" id="nav-home" onclick="switchPage('home')">首頁</a></li>
-                <li class="nav-item"><a class="nav-link" id="nav-about" onclick="switchPage('about')">關於我們</a></li>
-                <li class="nav-item"><a class="nav-link" id="nav-services" onclick="switchPage('services')">服務項目</a></li>
-                <li class="nav-item"><a class="nav-link" id="nav-contact" onclick="switchPage('contact')">聯絡我們</a></li>
+                <li><a class="nav-link active" id="nav-home" onclick="switchPage('home')">首頁</a></li>
+                <li><a class="nav-link" id="nav-about" onclick="switchPage('about')">核心理念</a></li>
+                <li><a class="nav-link" id="nav-services" onclick="switchPage('services')">顧問項目</a></li>
+                <li><a class="nav-link" id="nav-contact" onclick="switchPage('contact')">預約諮詢</a></li>
             </ul>
         </nav>
     </header>
 
-    <!-- 主內容區 -->
+    <!-- 主要內容空間 -->
     <main>
         
-        <!-- 首頁 -->
+        <!-- 首頁 (Home) -->
         <section id="home" class="page-section active">
-            <div class="hero">
-                <h1>啟航海外學術之旅，成就未來無限可能</h1>
-                <p>Devotion Education — 您最值得信賴的專業留學顧問與海外教育專家</p>
-                <button class="btn" onclick="switchPage('services')">探索我們的服務</button>
+            <!-- 呼叫同目錄下的史丹佛大學背景圖 -->
+            <div class="hero-fullscreen">
+                <div class="hero-glass-card">
+                    <h1>啟航海外學術之旅<br>成就未來無限可能</h1>
+                    <p>Devotion Education — 您最值得信賴的專業留學顧問與海外教育專家，陪伴無數學子叩關全球百大名校殿堂。</p>
+                    <button class="btn-classic" onclick="switchPage('services')">探索顧問項目</button>
+                </div>
             </div>
             
-            <h2>為什麼選擇 Devotion Education？</h2>
-            <p class="section-desc">我們擁有豐富的諮詢經驗，陪伴無數學子成功申請全球頂尖名校。</p>
+            <div class="editorial-title">
+                <h2>卓越，源於對教育的專注與奉獻</h2>
+                <div class="subtitle">Why Devotion Education</div>
+            </div>
             
-            <div class="services-grid">
-                <div class="service-card">
-                    <h3>專業精準落點</h3>
-                    <p>根據學生的學術背景、興趣與職涯規劃，量身打造最合適的校系申請清單。</p>
+            <!-- 經典人文雜誌交錯編排：取代平庸的方塊卡片 -->
+            <div class="split-row">
+                <div class="split-text">
+                    <div class="number">01</div>
+                    <h3>專業精準落點分析</h3>
+                    <p>我們拒絕千篇一律的罐頭落點。資深顧問團隊會全面剖析學生的學術背景、獨特生命經驗與長遠職涯蓝圖，量身精選出最符合預期與未來發展的策略性校系申請清單。</p>
                 </div>
-                <div class="service-card">
-                    <h3>精緻文件指導</h3>
-                    <p>外籍顧問團隊親自指導個人陳述 (PS)、讀書計畫 (SOP) 與推薦信，突顯個人亮點。</p>
+                <div class="split-visual">
+                    <div class="quote-box">「教育不是注滿一桶水，而是點燃一把火。」</div>
                 </div>
-                <div class="service-card">
-                    <h3>一站式貼心服務</h3>
-                    <p>從落點分析、面試培訓到簽證辦理、行前說明，全程細心陪伴，讓您安心出國。</p>
+            </div>
+            
+            <div class="split-row reverse">
+                <div class="split-text">
+                    <div class="number">02</div>
+                    <h3>精緻學術文件指導</h3>
+                    <p>由頂尖名校出身的外籍顧問團隊親自操刀，一對一深度引導學生挖掘自身閃光點。從個人陳述 (PS)、讀書計畫 (SOP) 到推薦信，字斟句酌，打造具備強大說服力的申請文書。</p>
+                </div>
+                <div class="split-visual">
+                    <div class="quote-box">精心雕琢每一份文件，在萬份申請書中脫穎而出。</div>
+                </div>
+            </div>
+
+            <div class="split-row">
+                <div class="split-text">
+                    <div class="number">03</div>
+                    <h3>一站式頂級貼心陪伴</h3>
+                    <p>從最初的背景提升規劃、全英文模擬面試培訓，到錄取後的簽證辦理、海外宿舍申請及行前心理建設。Devotion Education 全程細心隨行，讓您的海外求學之路走得無比篤定。</p>
+                </div>
+                <div class="split-visual">
+                    <div class="quote-box">從遞交申請到順利入學，我們是您最堅實的後盾。</div>
                 </div>
             </div>
         </section>
 
-        <!-- 關於我們 -->
+        <!-- 核心理念 (About) -->
         <section id="about" class="page-section">
-            <h2>關於我們</h2>
-            <p class="section-desc">關於 Devotion Education 的理念與核心價值</p>
+            <div class="editorial-title">
+                <h2>關於我們</h2>
+                <div class="subtitle">Our Philosophy</div>
+            </div>
             
-            <div class="about-content">
-                <p><strong>Devotion Education (海外教育顧問)</strong> 成立的初衷，是為了打破資訊不對稱，為渴望開拓國際視野的學子提供最客觀、最專業的諮詢服務。</p>
-                <p>我們的核心業務涵蓋 <strong>Study Abroad Consultant (留學顧問)</strong> 與 <strong>Overseas Education Advisor (海外教育諮詢)</strong>。團隊成員皆擁有海外留學背景與多年的教育產業經驗，深知國際學生在面對申請時的焦慮與挑戰。</p>
-                <p>「Devotion」代表我們的專注與奉獻。我們不只是代辦，更是您人生轉折點上的引路人與合作夥伴。不論您的目標是美國常春藤、英國羅素集團，還是歐美各國的頂尖技職與藝術學院，我們都將竭盡所能，助您圓夢。</p>
+            <div class="editorial-about-box">
+                <p><strong>Devotion Education (海外教育顧問)</strong> 成立的初衷，是為了打破高等教育資訊的不對稱，為渴望開拓國際視野的菁英學子提供最具客觀性、遠瞻性與專業性的諮詢渠道。</p>
+                <p>我們的核心業務深耕於 <strong>Study Abroad Consultant (留學顧問)</strong> 與 <strong>Overseas Education Advisor (海外教育諮詢)</strong>。團隊成員皆擁有海外名校留學背景與多年的國際教育產業資歷，深知國際學生在面對繁複申請流程時的焦慮、盲點與巨大挑戰。</p>
+                <p>「Devotion」代表我們的專注、熱忱與對每一位學生未來的莊嚴承諾。我們不只是傳統的代辦中介，更是您人生重要轉折點上的引路人與合作夥伴。不論您的目標是美國常春藤盟校、英國羅素大學集團，還是歐美各國的頂尖商學院與藝術殿堂，我們都將竭盡所能，助您圓夢遠方。</p>
             </div>
         </section>
 
-        <!-- 服務項目 -->
+        <!-- 顧問項目 (Services) -->
         <section id="services" class="page-section">
-            <h2>服務項目</h2>
-            <p class="section-desc">全方位的海外升學與教育規劃服務</p>
+            <div class="editorial-title">
+                <h2>顧問項目</h2>
+                <div class="subtitle">Consulting Services</div>
+            </div>
             
-            <div class="services-grid">
-                <div class="service-card">
-                    <h3>海外大學 / 碩博士申請諮詢</h3>
-                    <p>提供美、英、加、澳、歐陸等國家的全方位學位申請規劃，掌握最新入學趨勢。</p>
+            <div class="split-row">
+                <div class="split-text">
+                    <h3>海外大學 / 碩博士全方位申請</h3>
+                    <p>全面覆蓋美國、英國、加拿大、澳洲及歐陸等國家的頂尖學位申請。掌握每年各校招生委員會的最新評選動態與潛規則，為學生爭取最佳錄取與獎學金機會。</p>
                 </div>
-                <div class="service-card">
-                    <h3>一對一模擬面試培訓</h3>
-                    <p>針對特定校系進行全英文模擬面試，訓練答題邏輯、儀態與自信心，提高錄取率。</p>
+                <div class="split-text">
+                    <h3>名校一對一英文模擬面試</h3>
+                    <p>針對特定明星校系與熱門科系，進行全英文高強度模擬面試。全面特訓學生的答題邏輯、語調儀態與臨場應變自信心，大幅提升最終錄取機率。</p>
                 </div>
-                <div class="service-card">
-                    <h3>語言檢定與學術課業規劃</h3>
-                    <p>協助規劃 TOEFL, IELTS, GRE, GMAT 等重要考試的準備時程，維持在校 GPA。</p>
+            </div>
+
+            <div class="split-row" style="margin-bottom: 0;">
+                <div class="split-text">
+                    <h3>學術課業與語言檢定時程規劃</h3>
+                    <p>精密協助學生規劃 TOEFL、IELTS、GRE、GMAT 等關鍵標準化考試的黃金準備期，並針對在校 GPA 維持與課外活動延伸給予精準指導。</p>
                 </div>
-                <div class="service-card">
-                    <h3>職涯發展與實習諮詢</h3>
-                    <p>結合海外就業市場趨勢，引導學生在學期間累積實習經驗，為畢業後的職涯提早佈局。</p>
+                <div class="split-text">
+                    <h3>國際職涯發展與實習策略</h3>
+                    <p>結合全球就業市場與工作簽證趨勢，超前部署引導學生在學期間累積關鍵實習經驗，讓海外留學的巨大投資轉化為國際職場的絕對競爭力。</p>
                 </div>
             </div>
         </section>
 
-        <!-- 聯絡我們 -->
+        <!-- 預約諮詢 (Contact) -->
         <section id="contact" class="page-section">
-            <h2>聯絡我們</h2>
-            <p class="section-desc">預約首次免費諮詢，開啟您的海外留學第一步</p>
+            <div class="editorial-title">
+                <h2>預約諮詢</h2>
+                <div class="subtitle">Start Your Journey</div>
+            </div>
             
-            <div class="contact-container">
-                <div class="contact-info">
+            <div class="contact-flex">
+                <div class="contact-meta">
                     <h3>聯絡資訊</h3>
-                    <p><strong>地址：</strong> 台北市大安區忠孝東路（範例地址）</p>
-                    <p><strong>電話：</strong> +886-2-1234-5678</p>
-                    <p><strong>Email：</strong> info@devotionedu.example.com</p>
-                    <p><strong>營業時間：</strong> 週一至週五 10:00 - 19:00 (週末採預約制)</p>
+                    <p><strong>機構地址：</strong> 台北市大安區忠孝東路（商務辦公區）</p>
+                    <p><strong>諮詢專線：</strong> +886-2-1234-5678</p>
+                    <p><strong>官方信箱：</strong> advisor@devotionedu.example.com</p>
+                    <p><strong>服務時間：</strong> 週一至週五 10:00 - 19:00 (週末採高級VIP預約制)</p>
                 </div>
                 
-                <div class="contact-form">
-                    <div class="form-group">
-                        <label for="name">姓名</label>
+                <div class="contact-webform">
+                    <div class="form-field">
+                        <label for="name">貴姓大名</label>
                         <input type="text" id="name" placeholder="請輸入您的姓名">
                     </div>
-                    <div class="form-group">
+                    <div class="form-field">
                         <label for="email">電子信箱</label>
-                        <input type="email" id="email" placeholder="請輸入您的 Email">
+                        <input type="email" id="email" placeholder="請輸入您的聯絡 Email">
                     </div>
-                    <div class="form-group">
-                        <label for="msg">諮詢意向（想去的國家/預計出國時間）</label>
-                        <textarea id="msg" rows="4" placeholder="請簡單描述您的需求..."></textarea>
+                    <div class="form-field">
+                        <label for="msg">諮詢意向（欲申請國家 / 目標學位 / 預計出國時間）</label>
+                        <textarea id="msg" rows="4" placeholder="請簡單描述您或孩子的現狀與留學理想..."></textarea>
                     </div>
-                    <button class="btn" style="width:100%;" onclick="alert('謝謝您的訊息！這只是靜態範例，後續若需連動後台收信功能可再擴充。')">送出預約</button>
+                    <button class="btn-classic" style="width:100%; text-align:center;" onclick="alert('謝謝您的預約！Devotion Education 顧問團隊將於24小時內與您聯繫。')">送出預約申請</button>
                 </div>
             </div>
         </section>
@@ -455,7 +580,7 @@
 
     <!-- 頁尾 -->
     <footer>
-        <p>&copy; 2026 Devotion Education. All Rights Reserved. | Overseas Education Advisor & Study Abroad Consultant</p>
+        <p>&copy; 2026 Devotion Education. All Rights Reserved. <br> Overseas Education Advisor & Study Abroad Consultant</p>
     </footer>
 
     <!-- 網頁分頁切換控制 JavaScript -->
