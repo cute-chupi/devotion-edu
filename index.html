@@ -375,35 +375,39 @@
             border-top: 2px solid var(--border-line);
         }
 
-        /* 手機版 RWD 自適應 */
+        /* ==========================================================================
+           📱 全新 RWD 自適應：完美修復手機版與平版排版
+           ========================================================================== */
+        
+        /* 1. 平板與高解析度手機 (992px 以下) */
         @media (max-width: 992px) {
             .gallery-hero-grid {
-                height: auto;
-                display: flex;
-                flex-direction: column;
+                /* 平板上高度稍微縮小，比例更和諧 */
+                height: 600px; 
+                margin-bottom: 50px;
             }
-            .hero-visual-side {
-                position: relative;
-                height: 350px;
-            }
+
             .hero-text-side {
-                position: relative;
-                top: 0;
-                right: 0;
-                width: 100%;
-                min-width: 100%;
-                padding: 40px 20px;
-                background-color: var(--bg-cream-paper);
-                border: none;
+                /* 稍微把字往中間收，寬度放大，防止字被切掉 */
+                left: 5%;
+                width: 60%;
+                min-width: unset; /* 解除 400px 限制，防止手機版撐破螢幕 */
             }
+
+            .hero-text-side h1 {
+                font-size: 32px; /* 標題稍微縮小 */
+            }
+
             .notes-layout {
-                grid-template-columns: 1fr;
-                gap: 50px;
+                grid-template-columns: 1fr; /* 三排核心特質在平板改為單排垂直排列 */
+                gap: 40px;
             }
+
             .contact-grid {
                 grid-template-columns: 1fr;
                 gap: 50px;
             }
+
             .info-sidebar {
                 border-right: none;
                 border-bottom: 1px solid var(--border-line);
@@ -412,25 +416,92 @@
             }
         }
 
+        /* 2. 直向直覺手機版 (768px 以下) — 靈魂修正 */
         @media (max-width: 768px) {
+            /* 調整導覽列：Logo 與選單上下排列，乾淨置中 */
             .nav-container {
                 flex-direction: column;
-                gap: 20px;
-                padding: 20px;
+                gap: 15px;
+                padding: 15px 20px;
             }
+
+            .logo-area {
+                text-align: center;
+            }
+
             .nav-menu {
                 flex-wrap: wrap;
                 justify-content: center;
+                gap: 2px;
             }
+
             .nav-link {
-                font-size: 13px;
+                font-size: 12px;
                 padding: 4px 10px;
             }
-            .page-section {
-                padding: 50px 20px;
+
+            /* 核心：將手機版改成「字在圖下方」的經典畫報排版，確保極致的閱讀舒適度 */
+            .gallery-hero-grid {
+                height: auto; /* 解除固定高度，由內容撐開 */
+                display: flex;
+                flex-direction: column;
+                background-color: var(--text-ink); /* 背景改成油墨深色，完美銜接白色文字 */
+                margin-bottom: 40px;
             }
+
+            .hero-visual-side {
+                position: relative;
+                width: 100vw;
+                height: 380px; /* 手機版照片維持固定高度，展現大氣圖書館 */
+            }
+
+            .hero-text-side {
+                position: relative; /* 解除絕對定位，讓文字乖乖排在圖片下方 */
+                left: 0;
+                top: 0;
+                bottom: 0;
+                width: 100vw;
+                min-width: 100vw;
+                padding: 40px 24px; /* 給予精緻的左右留白 */
+                background-color: var(--text-ink); /* 延續深色底色 */
+                box-sizing: border-box;
+            }
+
+            /* 優化手機版文字大小與行距 */
             .hero-text-side h1 {
                 font-size: 26px;
+                line-height: 1.5;
+                color: #fbf9f4; /* 保持精緻燕麥白 */
+                margin-bottom: 20px;
+            }
+
+            .hero-text-side p {
+                font-size: 14px;
+                line-height: 1.8;
+                color: #e5dfd3; /* 保持奶茶色 */
+                margin-bottom: 30px;
+            }
+
+            .btn-editorial {
+                /* 手機版按鈕線條改為燕麥奶色 */
+                border: 1px solid #fbf9f4;
+                color: #fbf9f4;
+                width: 100%; /* 手機上按鈕滿版更好點擊 */
+                text-align: center;
+                padding: 14px 0;
+            }
+
+            /* 其他版面小調整 */
+            .page-section {
+                padding: 30px 20px 60px 20px; /* 縮小手機版的外圍留白 */
+            }
+
+            .index-header {
+                margin-bottom: 40px;
+            }
+
+            .index-header h2 {
+                font-size: 22px;
             }
         }
     </style>
