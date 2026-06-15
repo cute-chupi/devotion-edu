@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Devotion Education — (Overseas Education Advisor)</title>
     
-    <!-- 引入高階印刷感字型 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,700;1,400&family=EB+Garamond:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;500&family=Noto+Sans+TC:wght@300;400;500&family=Noto+Serif+TC:wght@400;700&display=swap" rel="stylesheet">
@@ -45,7 +44,6 @@
             position: sticky;
             top: 0;
             z-index: 1000;
-            /* 🔴 已移除原有的 border-bottom 黑色線條 */
         }
 
         .nav-container {
@@ -79,10 +77,17 @@
             color: var(--text-muted);
         }
 
+        /* ─── 導覽列與選單寬度對齊修正 ─── */
         .nav-menu {
             display: flex;
             list-style: none;
             gap: 5px;
+        }
+
+        /* 讓每個 li 成為定位基準 */
+        .nav-menu li.nav-item, 
+        .nav-menu li:not(.nav-item) {
+            position: relative;
         }
 
         .nav-link {
@@ -90,16 +95,58 @@
             text-decoration: none;
             font-size: 14px;
             font-weight: 400;
-            padding: 6px 16px;
+            display: block;
+            padding: 6px 16px; 
             transition: all 0.2s ease;
             cursor: pointer;
-
             font-family: 'Century Gothic', sans-serif;
+            text-align: center; /* 確保文字在黑塊中置中 */
         }
 
         .nav-link:hover, .nav-link.active {
             background-color: var(--text-ink);
             color: var(--bg-cream-paper);
+        }
+
+        /* 下拉子選單：寬度強行與父層 <li> (即 SERVICES 按鈕) 100% 同寬 */
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%; 
+            background-color: var(--bg-cream-paper);
+            border: 1px solid var(--border-line);
+            z-index: 9999;
+            animation: fadeInPage 0.2s ease;
+            box-sizing: border-box; 
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 10px 0; 
+            font-size: 13px;
+            color: var(--text-ink);
+            text-decoration: none;
+            font-family: 'Century Gothic', sans-serif;
+            letter-spacing: 1px;
+            white-space: nowrap;
+            cursor: pointer;
+            text-align: center; /* 子選項文字置中 */
+            border-bottom: 1px solid rgba(43,37,32,0.08);
+        }
+
+        .dropdown-menu a:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: var(--text-ink);
+            color: var(--bg-cream-paper);
+        }
+
+        .nav-item:hover .dropdown-menu {
+            display: block;
         }
 
         /* 頁面區塊控制 */
@@ -121,22 +168,17 @@
             to { opacity: 1; }
         }
 
-        /* 🖼️ 首頁：全版圖片與文字覆蓋排版 (參考 image_d79f25.jpg 的視覺意象) */
+        /* 🖼️ 首頁：全版圖片與文字覆蓋排版 */
         .gallery-hero-grid {
-    position: relative;
-    
-    /* 🔴 核心修改：打破外層 1300px 限制，強行左右拉伸至 100% 滿版 */
-    width: 100vw;
-    margin-left: calc(-50vw + 50%);
-    margin-right: calc(-50vw + 50%);
-    
-    height: 800px;
-    margin-bottom: 80px;
-    overflow: hidden;
-    
-    /* 🔴 移除原本的圓角，讓它與螢幕邊緣完美貼合 */
-    border-radius: 0; 
-}
+            position: relative;
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+            margin-right: calc(-50vw + 50%);
+            height: 800px;
+            margin-bottom: 80px;
+            overflow: hidden;
+            border-radius: 0; 
+        }
 
         .hero-visual-side {
             position: absolute;
@@ -149,32 +191,25 @@
             z-index: 1;
         }
 
-        /* 右側文字區塊改為絕對定位，浮動在滿版大圖之上 */
         .hero-text-side {
-    position: absolute;
-    
-    /* 🔴 核心修改：將 right 改為 left，把區塊強行移到左側 */
-    left: 10%;  /* 距離螢幕左側 10%，大螢幕下比例非常好看 */
-    right: auto; /* 確保清除原本可能殘留的右側定位 */
-    
-    top: 50px;
-    bottom: 50px;
-    width: 40%;
-    min-width: 400px;
-    
-    /* 以下維持之前的設定：無底色、無毛玻璃 */
-    background-color: transparent;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-    border: none;
-    border-radius: 0;
-    padding: 0;
-    
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    z-index: 2;
-}
+            position: absolute;
+            left: 10%;
+            right: auto; 
+            top: 50px;
+            bottom: 50px;
+            width: 40%;
+            min-width: 400px;
+            background-color: transparent;
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
+            border: none;
+            border-radius: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            z-index: 2;
+        }
 
         .section-tag {
             font-family: 'Bodoni Moda', serif;
@@ -184,30 +219,27 @@
             margin-bottom: 20px;
         }
 
-        /* 主標題修改 */
-.hero-text-side h1 {
-    font-family: 'Noto Serif TC', serif;
-    font-size: 38px;
-    font-weight: 700;
-    line-height: 1.4;
-    
-    /* 🔴 修改這裡：改為清爽明亮的溫潤燕麥奶色 */
-    color: #fbf9f4; 
-    
-    margin-bottom: 25px;
-}
+        .hero-text-side h1 {
+            font-family: 'Noto Serif TC', serif;
+            font-size: 38px;
+            font-weight: 700;
+            line-height: 1.4;
+            color: #fbf9f4; 
+            margin-bottom: 25px;
+        }
 
-/* 內文說明修改 */
-.hero-text-side p {
-    font-size: 15px;
-    font-weight: 400;
-    
-    /* 🔴 修改這裡：改為稍微帶一點點灰調的柔和奶茶色，維持閱讀層次感，同時足夠清晰 */
-    color: #e5dfd3; 
-    
-    margin-bottom: 40px;
-    text-align: justify;
-}
+        .hero-text-side p {
+            font-size: 15px;
+            font-weight: 400;
+            color: #e5dfd3; 
+            margin-bottom: 40px;
+            text-align: justify;
+        }
+
+        .hero-text-side p.hero-subtitle {
+             margin-bottom: 15px;
+             font-weight: 500; /* 稍微加粗一點點，讓層次更漂亮 */
+        }
 
         /* 獨立雜誌風按鈕 */
         .btn-editorial {
@@ -289,6 +321,79 @@
             text-align: justify;
         }
 
+        /* 🎓 新增：Gallery 榜單畫報排版樣式 */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .gallery-card {
+            border: 1px solid var(--border-line);
+            background-color: var(--bg-milk-tea);
+            padding: 35px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 35px;
+            right: 35px;
+            font-family: 'Bodoni Moda', serif;
+            font-size: 14px;
+            font-style: italic;
+            border: 1px solid var(--border-line);
+            padding: 2px 10px;
+            text-transform: uppercase;
+        }
+
+        .university-name {
+            font-family: 'Bodoni Moda', 'Noto Serif TC', serif;
+            font-size: 24px;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            max-width: 75%;
+        }
+
+        .university-sub {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+        }
+
+        .accepted-major {
+            font-family: 'Noto Serif TC', serif;
+            font-size: 18px;
+            font-weight: 700;
+            border-left: 3px solid var(--border-line);
+            padding-left: 12px;
+            margin-bottom: 20px;
+        }
+
+        .student-profile {
+            font-size: 14px;
+            color: var(--text-muted);
+            border-top: 1px dashed rgba(43, 37, 32, 0.2);
+            padding-top: 15px;
+        }
+
+        .student-profile span {
+            display: block;
+            margin-bottom: 4px;
+        }
+
         /* 關於我們：概念宣言式排版 */
         .manifesto-box {
             max-width: 850px;
@@ -363,6 +468,8 @@
             border-bottom: 2.5px solid var(--text-ink);
         }
 
+        
+
         /* 頁尾 */
         footer {
             background-color: var(--text-ink);
@@ -376,31 +483,33 @@
         }
 
         /* ==========================================================================
-           📱 全新 RWD 自適應：完美修復手機版與平版排版
+           📱 RWD 自適應：完美修復手機版與平版排版
            ========================================================================== */
-        
-        /* 1. 平板與高解析度手機 (992px 以下) */
         @media (max-width: 992px) {
             .gallery-hero-grid {
-                /* 平板上高度稍微縮小，比例更和諧 */
                 height: 600px; 
                 margin-bottom: 50px;
             }
 
             .hero-text-side {
-                /* 稍微把字往中間收，寬度放大，防止字被切掉 */
                 left: 5%;
                 width: 60%;
-                min-width: unset; /* 解除 400px 限制，防止手機版撐破螢幕 */
+                min-width: unset; 
             }
 
             .hero-text-side h1 {
-                font-size: 32px; /* 標題稍微縮小 */
+                font-size: 32px; 
             }
 
             .notes-layout {
-                grid-template-columns: 1fr; /* 三排核心特質在平板改為單排垂直排列 */
+                grid-template-columns: 1fr; 
                 gap: 40px;
+            }
+
+            /* Gallery 平板改單欄 */
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
             }
 
             .contact-grid {
@@ -416,9 +525,7 @@
             }
         }
 
-        /* 2. 直向直覺手機版 (768px 以下) — 靈魂修正 */
         @media (max-width: 768px) {
-            /* 調整導覽列：Logo 與選單上下排列，乾淨置中 */
             .nav-container {
                 flex-direction: column;
                 gap: 15px;
@@ -440,60 +547,56 @@
                 padding: 4px 10px;
             }
 
-            /* 核心：將手機版改成「字在圖下方」的經典畫報排版，確保極致的閱讀舒適度 */
             .gallery-hero-grid {
-                height: auto; /* 解除固定高度，由內容撐開 */
+                height: auto; 
                 display: flex;
                 flex-direction: column;
-                background-color: var(--text-ink); /* 背景改成油墨深色，完美銜接白色文字 */
+                background-color: var(--text-ink); 
                 margin-bottom: 40px;
             }
 
             .hero-visual-side {
                 position: relative;
                 width: 100vw;
-                height: 380px; /* 手機版照片維持固定高度，展現大氣圖書館 */
+                height: 380px; 
             }
 
             .hero-text-side {
-                position: relative; /* 解除絕對定位，讓文字乖乖排在圖片下方 */
+                position: relative; 
                 left: 0;
                 top: 0;
                 bottom: 0;
                 width: 100vw;
                 min-width: 100vw;
-                padding: 40px 24px; /* 給予精緻的左右留白 */
-                background-color: var(--text-ink); /* 延續深色底色 */
+                padding: 40px 24px; 
+                background-color: var(--text-ink); 
                 box-sizing: border-box;
             }
 
-            /* 優化手機版文字大小與行距 */
             .hero-text-side h1 {
                 font-size: 26px;
                 line-height: 1.5;
-                color: #fbf9f4; /* 保持精緻燕麥白 */
+                color: #fbf9f4; 
                 margin-bottom: 20px;
             }
 
             .hero-text-side p {
                 font-size: 14px;
                 line-height: 1.8;
-                color: #e5dfd3; /* 保持奶茶色 */
+                color: #e5dfd3; 
                 margin-bottom: 30px;
             }
 
             .btn-editorial {
-                /* 手機版按鈕線條改為燕麥奶色 */
                 border: 1px solid #fbf9f4;
                 color: #fbf9f4;
-                width: 100%; /* 手機上按鈕滿版更好點擊 */
+                width: 100%; 
                 text-align: center;
                 padding: 14px 0;
             }
 
-            /* 其他版面小調整 */
             .page-section {
-                padding: 30px 20px 60px 20px; /* 縮小手機版的外圍留白 */
+                padding: 30px 20px 60px 20px; 
             }
 
             .index-header {
@@ -508,7 +611,6 @@
 </head>
 <body>
 
-    <!-- 導覽列 -->
     <header>
         <nav class="nav-container">
             <a class="logo-area" onclick="switchPage('home')">
@@ -517,26 +619,32 @@
             </a>
             <ul class="nav-menu">
                 <li><a class="nav-link active" id="nav-home" onclick="switchPage('home')">HOME</a></li>
-                <li><a class="nav-link" id="nav-about" onclick="switchPage('about')">ABOUT</a></li>
-                <li><a class="nav-link" id="nav-services" onclick="switchPage('services')">SERVICES</a></li>
-                <li><a class="nav-link" id="nav-contact" onclick="switchPage('contact')">CONTACT</a></li>
+                <li><a class="nav-link" id="nav-about" onclick="switchPage('about')">ABOUT US</a></li>
+                <li class="nav-item">
+                    <a class="nav-link" id="nav-services" onclick="switchPage('services')">SERVICES</a>
+                    <div class="dropdown-menu">
+                        <a onclick="switchPage('services-uk')">英國 UK</a>
+                        <a onclick="switchPage('services-us')">美國 US</a>
+                        <a onclick="switchPage('services-au')">澳洲 AU</a>
+                    </div>
+                </li>
+                <li><a class="nav-link" id="nav-gallery" onclick="switchPage('gallery')">GALLERY</a></li>
+                <li><a class="nav-link" id="nav-contact" onclick="switchPage('contact')">CONTACT US</a></li>
             </ul>
         </nav>
     </header>
 
-    <!-- 主要內容區 -->
     <main>
         
-        <!-- 01 // INDEX (首頁) -->
         <section id="home" class="page-section active">
             <div class="gallery-hero-grid">
-                <!-- 滿版背景圖 -->
                 <div class="hero-visual-side"></div>
-                <!-- 浮動於上方的文字卡片 -->
                 <div class="hero-text-side">
                     <div class="section-tag"></div>
-                    <h1>啟航海外學術之旅<br>成就未來無限可能.</h1>
-                    <p>Devotion Education 是一家專注於高端定制的海外教育諮詢與留學規劃機構。我們打破傳統罐頭代辦的死板模式，以獨立刊物般的精準美學與深刻洞察，陪伴菁英學子叩關全球頂尖名校殿堂。</p>
+                    <h1>開啟你的國際前程<br>陪你申請世界，也陪你走進世界。</h1>
+                    <!-- 🔴 為第一個段落加上 hero-subtitle 類別，方便我們用 CSS 精準控制它與下方的間距 -->
+                    <p class="hero-subtitle">專業、透明、全程陪伴</p>
+                    <p>留學申請不只是填寫表格與準備文件，更是一次重新認識自己的機會。<br>以專業為基礎，以真誠為核心，陪伴你從第一步開始，走向更寬廣的世界。</p>
                     <button class="btn-editorial" onclick="switchPage('services')">View Services —</button>
                 </div>
             </div>
@@ -565,7 +673,6 @@
             </div>
         </section>
 
-        <!-- 02 // ABOUT (關於我們) -->
         <section id="about" class="page-section">
             <div class="index-header">
                 <h2>核心理念 / 關於我們</h2>
@@ -579,7 +686,6 @@
             </div>
         </section>
 
-        <!-- 03 // SERVICES (顧問項目) -->
         <section id="services" class="page-section">
             <div class="index-header">
                 <h2>顧問項目 / 服務範疇</h2>
@@ -605,11 +711,63 @@
             </div>
         </section>
 
-        <!-- 04 // CONTACT (預約諮詢) -->
+        <section id="gallery" class="page-section">
+            <div class="index-header">
+                <h2>榮譽榜單 / 璀璨戰績</h2>
+                <div class="page-number">04</div>
+            </div>
+            
+            <div class="gallery-grid">
+                <div class="gallery-card">
+                    <div class="card-badge">UK / Russell</div>
+                    <h3 class="university-name">University College London</h3>
+                    <div class="university-sub">UCL — 倫敦大學學院</div>
+                    <div class="accepted-major">MSc Data Science</div>
+                    <div class="student-profile">
+                        <span><strong>學生背景：</strong> 台北大學 統計學系</span>
+                        <span><strong>核心優勢：</strong> 專業跨領域文件包裝 + 數據專案經歷深度挖掘</span>
+                    </div>
+                </div>
+
+                <div class="gallery-card">
+                    <div class="card-badge">USA / Ivy League</div>
+                    <h3 class="university-name">Columbia University</h3>
+                    <div class="university-sub">哥倫比亞大學</div>
+                    <div class="accepted-major">MA Economics</div>
+                    <div class="student-profile">
+                        <span><strong>學生背景：</strong> 台灣大學 經濟學系 (GPA 3.7)</span>
+                        <span><strong>核心優勢：</strong> 推薦信戰略佈局 + 常春藤等級面試全方位高強度特訓</span>
+                    </div>
+                </div>
+
+                <div class="gallery-card">
+                    <div class="card-badge">UK / Oxbridge</div>
+                    <h3 class="university-name">University of Cambridge</h3>
+                    <div class="university-sub">劍橋大學</div>
+                    <div class="accepted-major">MPhil in Advanced Computer Science</div>
+                    <div class="student-profile">
+                        <span><strong>學生背景：</strong> 清華大學 電資學院</span>
+                        <span><strong>核心優勢：</strong> 學術論文背景亮點放大 + 劍橋專項書面與口試精準輔導</span>
+                    </div>
+                </div>
+
+                <div class="gallery-card">
+                    <div class="card-badge">AUS / Go8</div>
+                    <h3 class="university-name">University of Melbourne</h3>
+                    <div class="university-sub">墨爾本大學</div>
+                    <div class="accepted-major">Master of Information Technology</div>
+                    <div class="student-profile">
+                        <span><strong>學生背景：</strong> 成功大學 資訊工程學系</span>
+                        <span><strong>核心優勢：</strong> 澳洲八大精準時程超前部署 + 居留職涯長遠戰略規劃</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section id="contact" class="page-section">
             <div class="index-header">
                 <h2>預約諮詢 / 開始旅程</h2>
-                <div class="page-number">04</div>
+                <div class="page-number">05</div>
             </div>
             
             <div class="contact-grid">
@@ -648,14 +806,99 @@
             </div>
         </section>
 
+        <section id="services-uk" class="page-section">
+            <div class="index-header">
+                <h2>英國留學 / United Kingdom</h2>
+                <div class="page-number">03-A</div>
+            </div>
+            <div class="manifesto-box">
+                <p>英國擁有牛津、劍橋、倫敦大學學院（UCL）、倫敦政經學院（LSE）等享譽全球的頂尖學府。其一年制碩士學制精實高效，投資報酬率極高，是追求高品質學歷的首選。</p>
+                <p>我們深度熟悉 <strong>羅素大學集團（Russell Group）</strong> 各校的招生偏好、UCAS 申請機制與 Personal Statement 的核心評分邏輯，協助您在眾多競爭者中脫穎而出。</p>
+                <p>從選校策略、文書雕琢，到英國學生簽證（Student Visa）辦理與抵英前的生活準備，我們提供全程一站式陪伴，讓您從容啟程。</p>
+            </div>
+            <div class="notes-layout" style="border-bottom: none;">
+                <div class="note-item">
+                    <div class="note-meta"><span>Oxbridge</span><span>(01)</span></div>
+                    <h3>牛津 / 劍橋申請指導</h3>
+                    <p>針對牛津、劍橋特殊的 SAQ、書面測驗與面試制度提供專項輔導，大幅提升進入面試與最終錄取的機會。</p>
+                </div>
+                <div class="note-item">
+                    <div class="note-meta"><span>UCAS</span><span>(02)</span></div>
+                    <h3>UCAS 全流程申請規劃</h3>
+                    <p>完整規劃五所學校選校清單、個人陳述（Personal Statement）深度撰寫指導，以及推薦信策略建議。</p>
+                </div>
+                <div class="note-item">
+                    <div class="note-meta"><span>Visa</span><span>(03)</span></div>
+                    <h3>英國學生簽證辦理</h3>
+                    <p>協助準備 CAS 號碼、財力證明、英語成績等所有簽證所需文件，確保流程順暢無虞。</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="services-us" class="page-section">
+            <div class="index-header">
+                <h2>美國留學 / United States</h2>
+                <div class="page-number">03-B</div>
+            </div>
+            <div class="manifesto-box">
+                <p>美國常春藤盟校與頂尖研究型大學提供最多元的學術資源、產業連結與職涯發展機會，是全球最受矚目的留學目的地。</p>
+                <p>我們深諳美國申請文化的精髓，從選校策略、<strong>Common App / Coalition App</strong> 操作、Essay 核心主題挖掘，到 Alumni Interview 面試特訓，全程精準陪伴，助您叩關夢想學府。</p>
+                <p>針對研究所申請，我們同樣提供 SOP（Study of Purpose）深度指導、教授聯繫策略與獎學金申請建議，讓您的申請不只成功，更出色。</p>
+            </div>
+            <div class="notes-layout" style="border-bottom: none;">
+                <div class="note-item">
+                    <div class="note-meta"><span>Undergrad</span><span>(01)</span></div>
+                    <h3>大學部申請 Common App</h3>
+                    <p>選校清單規劃、主文書（Main Essay）與補充文書（Supplement）的主題挖掘與精雕細琢，完整呈現你的獨特故事。</p>
+                </div>
+                <div class="note-item">
+                    <div class="note-meta"><span>Grad School</span><span>(02)</span></div>
+                    <h3>研究所 SOP / 推薦信指導</h3>
+                    <p>針對 MBA、法律、醫學、理工等不同領域，量身定制最具說服力的 Statement of Purpose 與教授聯繫策略。</p>
+                </div>
+                <div class="note-item">
+                    <div class="note-meta"><span>Interview</span><span>(03)</span></div>
+                    <h3>名校校友面試特訓</h3>
+                    <p>模擬哈佛、MIT、史丹佛等頂尖名校的面試場景，全英文高強度演練，培養臨場應變力與自信表達。</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="services-au" class="page-section">
+            <div class="index-header">
+                <h2>澳洲留學 / Australia</h2>
+                <div class="page-number">03-C</div>
+            </div>
+            <div class="manifesto-box">
+                <p>澳洲八大名校（Group of Eight）學術品質卓越，移民友善政策、優質生活環境與相對合理的學費，使其成為亞太地區最受歡迎的留學目的地之一。</p>
+                <p>我們提供從 <strong>澳洲大學申請、學生簽證（Student Visa 500）</strong> 辦理，到畢業後臨時居留簽證（Subclass 485）的全方位規劃，讓留學澳洲不只是求學，更是開啟移民新生活的第一步。</p>
+                <p>無論您的目標是墨爾本大學、澳洲國立大學，還是昆士蘭大學，我們都將以最專業的視角，協助您找到最適合的申請路徑。</p>
+            </div>
+            <div class="notes-layout" style="border-bottom: none;">
+                <div class="note-item">
+                    <div class="note-meta"><span>Go8</span><span>(01)</span></div>
+                    <h3>澳洲八大名校申請策略</h3>
+                    <p>深度分析各校入學要求、學術門檻與科系特色，為您規劃最具競爭力的選校清單與申請時程。</p>
+                </div>
+                <div class="note-item">
+                    <div class="note-meta"><span>Visa 500</span><span>(02)</span></div>
+                    <h3>學生簽證全程協助</h3>
+                    <p>協助準備 CoE 入學確認書、OSHC 海外學生健康保險，以及 ImmiAccount 簽證申請的每一個環節。</p>
+                </div>
+                <div class="note-item">
+                    <div class="note-meta"><span>PR Path</span><span>(03)</span></div>
+                    <h3>畢業後居留與移民規劃</h3>
+                    <p>結合職業評估（Skills Assessment）與 485 畢業生簽證，為有意移民澳洲的學生提供超前部署的長遠規劃。</p>
+                </div>
+            </div>
+        </section>
+
     </main>
 
-    <!-- 頁尾 -->
     <footer>
         <p>© 2026 DEVOTION EDUCATION. ALL RIGHTS RESERVED. // DESIGNED FOR EXCELLENCE.</p>
     </footer>
 
-    <!-- 網頁分頁切換控制 -->
     <script>
         function switchPage(pageId) {
             const sections = document.querySelectorAll('.page-section');
@@ -673,7 +916,10 @@
                 targetSection.classList.add('active');
             }
             
-            const targetLink = document.getElementById('nav-' + pageId);
+            // 🔴 邏輯修正：子頁面切換時讓 SERVICES 保持高亮
+            const subPages = ['services-uk', 'services-us', 'services-au'];
+            const navId = subPages.includes(pageId) ? 'nav-services' : 'nav-' + pageId;
+            const targetLink = document.getElementById(navId);
             if(targetLink) {
                 targetLink.classList.add('active');
             }
